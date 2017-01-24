@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <title>EWAIM</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+    <script src="{{ url_for('static', filename='js/jquery-2.2.3.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/js-util.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/d3.js') }}"></script>
+    <!-- Bootstrap Table -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-en-US.min.js"></script>
+    <!-- Math / LaTeX -->
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <!-- US States JSON -->
+    <script src="{{ url_for('static', filename='db/us_states.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <!-- Leaflet heatmap -->
+    <script src="static/js/leaflet-heat.js"></script>
+    <!-- Styles -->
+    <style type="text/css">
+        #top_push {
+            height: 60px;
+        }
+        .ghbtns { position: relative; top: 4px; margin-left: 5px; }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    {% for message in get_flashed_messages() %}
+      <div class=flash>{{ message }}</div>
+    {% endfor %}
+    {% block body %}{% endblock %}
+
+    <!-- FOOTER -->
+    {% block footer %}
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">This interactive database website is a collaborative project from Zhongqi Miao and Oliver Muellerklein</p>
+        </div>
+    </footer>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,366 @@
+
+/*********************************************
+* Core CSS
+*********************************************/
+
+/*body {
+    font-family: sans-serif;
+    background: #eee;
+}
+
+a, h1, h2 {
+    color: #377BA8;
+
+}
+h1, h2 {
+    font-family: 'Georgia', serif;
+    margin: 0;
+}
+
+h1 {
+    border-bottom: 2px solid #eee;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+*/
+
+/*********************************************
+* Class tags for entry boxes
+*********************************************/
+
+.page {
+    margin: 2em auto;
+    /*width: 35em;*/
+    border: 5px solid #ccc;
+    padding: 0.8em;
+    background: white;
+}
+
+.entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.entries li {
+    margin: 0.8em 1.2em;
+}
+
+.entries li h2 {
+    margin-left: -1em;
+}
+
+.add-entry {
+    font-size: 0.9em;
+    border-bottom: 1px solid #ccc;
+}
+
+.add-entry dl {
+    font-weight: bold;
+}
+
+.metanav {
+    text-align: right;
+    font-size: 0.8em;
+    padding: 0.3em;
+    margin-bottom: 1em;
+    background: #fafafa;
+}
+
+.flash {
+    background: #CEE5F5;
+    padding: 0.5em;
+    border: 1px solid #AACBE2;
+}
+
+.error {
+    background: #F0D6D6;
+    padding: 0.5em;
+}
+
+/*********************************************
+* CSV Table
+*********************************************/
+
+.row-index {
+    width: 50px;
+    display: inline-block;
+}
+
+.click-row {
+    cursor: pointer;
+}
+
+/*********************************************
+* Leaflet map
+*********************************************/
+
+#map-id {
+    height: 900px;
+}
+
+#map-intro {
+    height: 500px;
+}
+
+#single-point-map {
+    height: 750px;
+}
+
+#map-id-giant {
+    height: 750px;
+}
+
+#single-map-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#map-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#giant-map-container {
+
+}
+
+/*********************************************
+* Leaflet map - menu + buttons
+*********************************************/
+
+#menu-btn1 {
+    top: 12px;
+}
+#menu-btn2 {
+    top: 12px;
+}
+#menu-btn3 {
+    top: 12px;
+}
+#menu-btn4 {
+    top: 12px;
+}
+
+.btn-info-mod {
+    /* color: #fff; */
+    /* background-color: #5bc0de; */
+    color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: #46b8da;
+}
+
+.btn-info {
+    /* color: #fff; */
+    /* background-color: #5bc0de; */
+    color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: #46b8da;
+}
+
+.btn-group-lg > .btn {
+    padding: 18px 40px;
+    font-size: 16px;
+    line-height: 0.333333;
+    border-radius: 10px;
+}
+
+/*********************************************
+* Leaflet map - custom positions
+*********************************************/
+
+.leaflet-verticalcenter .wildcard {
+    position: absolute;
+    top: 25%;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.leaflet-verticalcenter .leftlet-right {
+    position: absolute;
+    top: 25%;
+}
+
+.leaflet-verticalcenter .leaflet-control {
+    margin-bottom: 10px;
+}
+
+.intro_info .leaflet-control {
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.leaflet-control-scale {
+    /*margin-left: 50%;
+    margin-right: 50%;
+    padding-top: 15%;*/
+}
+
+.leaflet-wildcard {
+    padding-top: 5%;
+}
+
+.leaflet-control-scale-line {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/*********************************************
+* Leaflet map - heatmap
+*********************************************/
+
+
+/*********************************************
+* Text over Leaflet map
+*********************************************/
+
+.map-box {
+    position: relative;
+}
+
+.map-box .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.map-box .overlay .btn {
+    pointer-events: auto;
+}
+
+.asd {
+    height: 200px;
+    border: 1px solid #444;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.state_info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+}
+.state_info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+.point_info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    width: 100%;
+    height: 350px;
+}
+.point_info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+.cntr_info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    width: 100%;
+    height: 250px;
+}
+.cntr_info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+.intro_info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    /*width: 100%;*/
+    height: 250px;
+}
+.intro_info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+.pearl_info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    width: 600px;
+    height: 250px;
+}
+.pearl_info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+.loc_info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    width: 500px;
+    height: 180px;
+}
+.loc_info h4 {
+    margin: 0 0 2px;
+    color: #777;
+}
+/*************************************************
+********************* FOOTER *********************
+*************************************************/
+
+.contain-all {
+    min-height: 100%;
+    margin-bottom: -100px;
+}
+
+.contain-all:after {
+    content: "";
+    display: block;
+}
+
+.footer, .contain-all:after {
+    height: 100px;
+}
+
+.footer {
+    /*position: absolute;*/
+    /*bottom: 0;
+    width: 100%;*/
+    background-color: #333;
+    /*background-color: rgba(177, 177, 177, 0.95);*/
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.container .footer-text {
+    margin: 20px 0;
+}
+
+.footer-text {
+    /* color: #9d9d9d; */
+    color: rgba(236, 236, 236, 0.7);
+    /*color: #000;*/
+}
