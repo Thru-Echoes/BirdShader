@@ -1,3 +1,5 @@
+<img src="https://travis-ci.org/Thru-Echoes/BirdShader.svg?branch=master">
+
 # BirdShader
 
 A web app for interactive plotting of millions+ points using Flask, Bokeh, and Datashader
