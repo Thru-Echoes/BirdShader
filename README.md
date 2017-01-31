@@ -14,7 +14,7 @@ Coming soon...
 
 ```
     $ python3 setup.py install
-    # And test (used for Travis-CL)
+    # And test (used for Travis-CI)
     $ python3 setup.py test
 ```
 
