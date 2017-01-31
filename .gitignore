@@ -21,3 +21,4 @@ __pycache__
 /static/py/__pycache__/
 /static/data/pearl-tif/pearl_data/
 /.DS_Store
+/point_data_test/outfile.parq
