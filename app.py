@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
+from bokeh.embed import components
+from bokeh.plotting import figure
+from bokeh.resources import INLINE
+from bokeh.util.string import encode_utf8
 from flask import Flask, request, render_template, redirect, url_for, flash
 from flask import abort
 from werkzeug import secure_filename
@@ -27,6 +32,20 @@ SECRET_KEY = "stars_and_moon"
 DEBUG = True
 app.config.from_object(__name__)
 
+colors = {
+    "Black" : "#000000",
+    "Red" : "#FF0000",
+    "Green" : "#00FF00",
+    "Blue" : "#0000FF",
+}
+
+## Utility for getitem
+def getitem(obj, item, default):
+    if item not in obj:
+        return Default
+    else:
+        return obj[item]
+
 ## Utility functions
 def makePathExist(path):
     try:
@@ -54,7 +73,42 @@ def index():
             try:
                 req_raw = request.form['optionsRadios']
                 if req_raw == "option-pearl":
-                    return render_template("pick_pearl_sp.html")
+                    """ Very simple embedding of a polynomial chart
+                    """
+
+                    # Grab the inputs arguments from the URL
+                    args = request.args
+                    # Get all the form arguments in the url with defaults
+                    try:
+                        color = colors[getitem(args, 'color', 'Black')]
+                        _from = int(getitem(args, '_from', 0))
+                        to = int(getitem(args, 'to', 10))
+                        x = list(range(_from, to + 1))
+                    except:
+                        color = 'Purple'
+                        _from = 0
+                        to = 10
+                        x = list(range(0, 10))
+
+                    # Create a polynomial line graph with those arguments
+                    fig = figure(title="Polynomial")
+                    fig.line(x, [i ** 2 for i in x], color=color, line_width=2)
+
+                    js_resources = INLINE.render_js()
+                    css_resources = INLINE.render_css()
+
+                    script, div = components(fig)
+                    html = render_template(
+                        'embed.html',
+                        plot_script=script,
+                        plot_div=div,
+                        js_resources=js_resources,
+                        css_resources=css_resources,
+                        color=color,
+                        _from=_from,
+                        to=to
+                    )
+                    return encode_utf8(html)
 
                 elif req_raw == "option-temp":
                     obj_list = get_csv()
@@ -209,49 +263,51 @@ def temp_map():
     }
     return render_template("temp_map.html", obj_list = obj_list, obj_show = obj_show, st_cali = st_cali)
 
-@app.route("/pick_pearl_sp", methods = ["GET", "POST"])
-def pick_pearl_sp():
+@app.route("/polynomial", methods = ["GET", "POST"])
+def polynomial():
     if request.method == "POST":
         print("\n------")
-        print("POST request in pick_pearl_sp")
+        print("POST request in polynomial")
         #print("request.form['query_string']: ", request.form['query_string'])
         print("------\n")
 
-        if request.form['query_string']:
-            try:
-                req_raw = request.form['query_string']
-                if req_raw == "abba":
-                    print("It is abba time...")
-                    init_zoom = 3
-                    init_lat = 11.252725743861603
-                    init_long = -0.005242086131886481
-                    data_name = "Global Parasite Distributions"
-                    pearl_sp = "abbreviata_bancrofti"
-                    prop_name = "Abbreviata bancrofti"
-                    obj_show = {
-                        "pearl_sp" : pearl_sp,
-                        "prop_name" : prop_name,
-                        "data_name" : data_name,
-                        "init_zoom" : init_zoom,
-                        "init_lat" : init_lat,
-                        "init_long" : init_long
-                    }
-                    ## Pull in PEARL metadata
-                    obj_meta = get_csv(csv_path = "./static/csv/pearl_data_summary.csv")
-                    obj_sp = get_csv(csv_path = "./static/csv/pearl_sp/ABBREVIATA_BANCROFTI.csv")
-                    return render_template("pearl_map.html", obj_show = obj_show, obj_meta = obj_meta, obj_sp = obj_sp)
+        """ Very simple embedding of a polynomial chart
+        """
 
+        # Grab the inputs arguments from the URL
+        args = flask.request.args
 
-                else:
-                    flash("Something went wrong with finding that species...")
-                    return redirect(request.url)
+        # Get all the form arguments in the url with defaults
+        color = colors[getitem(args, 'color', 'Black')]
+        _from = int(getitem(args, '_from', 0))
+        to = int(getitem(args, 'to', 10))
 
-            except:
-                flash("Bad query - could not interpret.")
-                return redirect(request.url)
+        # Create a polynomial line graph with those arguments
+        x = list(range(_from, to + 1))
+        fig = figure(title="Polynomial")
+        fig.line(x, [i ** 2 for i in x], color=color, line_width=2)
+
+        js_resources = INLINE.render_js()
+        css_resources = INLINE.render_css()
+
+        script, div = components(fig)
+        html = flask.render_template(
+            'embed.html',
+            plot_script=script,
+            plot_div=div,
+            js_resources=js_resources,
+            css_resources=css_resources,
+            color=color,
+            _from=_from,
+            to=to
+        )
+        return encode_utf8(html)
+
 
 @app.route("/pearl_map", methods = ["GET", "POST"])
 def pearl_map():
+
+    print("Where we at...")
 
     if request.method == "POST":
         print("\n------")
