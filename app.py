@@ -67,12 +67,13 @@ def index():
     if request.method == "POST":
         print("\n------")
         print("POST request in index")
+        print("request.form: ", request.form)
         print("------\n")
 
         if request.form['optionsRadios']:
             try:
                 req_raw = request.form['optionsRadios']
-                if req_raw == "option-pearl":
+                if req_raw == "option-poly":
                     """ Very simple embedding of a polynomial chart
                     """
 
@@ -99,7 +100,8 @@ def index():
 
                     script, div = components(fig)
                     html = render_template(
-                        'embed.html',
+                        #'embed.html',
+                        'show_poly.html',
                         plot_script=script,
                         plot_div=div,
                         js_resources=js_resources,
@@ -229,6 +231,14 @@ def index():
             except:
                 flash("Bad query - could not interpret.")
                 return redirect(request.url)
+
+        elif request.form["color_button"]:
+            color_foo = request.form["color_button"]
+            print("\n-------")
+            print("within request.form[color_button]")
+            print("request.form[color_button]: ", color_foo)
+            print("-------\n")
+            return redirect("request.url")
 
     return render_template("index.html")
 
