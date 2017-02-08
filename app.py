@@ -4,6 +4,8 @@ from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.resources import INLINE
 from bokeh.util.string import encode_utf8
+from bokeh.layouts import column
+from bokeh.models import CustomJS, ColumnDataSource, Slider
 from flask import Flask, request, render_template, redirect, url_for, flash
 from flask import abort
 from werkzeug import secure_filename
@@ -12,6 +14,7 @@ import os
 from ewaim import calculate
 from ewaim import get_csv
 from ewaim import mean_lat_long
+from ewaim import DynamicMap
 import csv
 import errno
 import json
@@ -106,12 +109,21 @@ def index():
 
                     # Create a polynomial line graph with those arguments
                     fig = figure(title="Polynomial")
+                    #print("\n===\nAttempt to wrap fig with callbacks...\n===\n")
+                    #fig_cb = DynamicMap(fig)
+                    #print("\n===\nFinished wrapping fig with callbacks...")
+                    #print("fig: ", fig)
+                    #print("fig_cb: ", fig_cb)
+                    #print("\n===\n")
+                    #fig_cb.line(x, [i ** 2 for i in x], color=color, line_width=2)
                     fig.line(x, [i ** 2 for i in x], color=color, line_width=2)
 
                     js_resources = INLINE.render_js()
                     css_resources = INLINE.render_css()
 
                     script, div = components(fig)
+                    #script, div = components(fig_cb)
+
                     html = render_template(
                         #'embed.html',
                         'show_poly.html',
