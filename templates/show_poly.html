@@ -149,8 +149,40 @@
                 <div class="row">
                     <div class="col-md-6">
                         <!-- A simple form for changing the graph -->
-                        <p> Select your settings: </p>
-                        <form name="color_button" method='GET'>
+                        <form role="form" method='POST' action=''>
+                            <div class="form-group">
+                                <fieldset class="form-group">
+                                    <legend>Select your settings:</legend>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsBokeh" id="optionsBokeh1" value="option-red" checked>
+                                            Line color: <i>red</i>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsBokeh" id="optionsBokeh1" value="option-green" checked>
+                                            Line color: <i>green</i>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsBokeh" id="optionsBokeh1" value="option-blue" checked>
+                                            Line color: <i>blue</i>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsBokeh" id="optionsBokeh1" value="option-black" checked>
+                                            Line color: <i>black</i>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <button type="submit" class="btn btn-default">Render Graph</button>
+                        </form>
+                        <!--form name="color_button" method='GET'-->
+                        <!--form name="optionsBokeh" method='GET'>
                             Color:
                             <select name="color">
                                 <option value="Red">Red</option>
@@ -166,7 +198,7 @@
                             <input type="text" name="to" value="{{ to }}">
                             <br>
                             <button type="submit">Submit</button>
-                        </form>
+                        </form-->
                     </div>
                     <div class="col-md-6">
                         {{ plot_div|indent(4)|safe }}

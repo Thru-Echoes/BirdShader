@@ -68,9 +68,22 @@ def index():
         print("\n------")
         print("POST request in index")
         print("request.form: ", request.form)
+        print("request.args: ", request.args)
         print("------\n")
 
-        if request.form['optionsRadios']:
+        try:
+            if request.form['optionsRadios']:
+                req_form = 'optionsRadios'
+            else:
+                req_form = 'optionsBokeh'
+        except:
+            if request.form['optionsBokeh']:
+                req_form = 'optionsBokeh'
+            else:
+                req_form = 'optionsRadios'
+
+        # if request.form['optionsRadios']:
+        if req_form == 'optionsRadios':
             try:
                 req_raw = request.form['optionsRadios']
                 if req_raw == "option-poly":
@@ -232,13 +245,68 @@ def index():
                 flash("Bad query - could not interpret.")
                 return redirect(request.url)
 
-        elif request.form["color_button"]:
-            color_foo = request.form["color_button"]
-            print("\n-------")
-            print("within request.form[color_button]")
-            print("request.form[color_button]: ", color_foo)
-            print("-------\n")
-            return redirect("request.url")
+        elif req_form == 'optionsBokeh':
+            try:
+
+                req_raw = request.form['optionsBokeh']
+                print("\n=========\nWithin optionsBokeh")
+                print("req_raw: ", req_raw)
+                print("request.args: ", request.args)
+                print("==========\n")
+
+                # Grab the inputs arguments from the URL
+                args = request.args
+                # Get all the form arguments in the url with defaults
+                try:
+
+                    if req_raw == 'option-blue':
+                        color = colors["Blue"]
+                    elif req_raw == 'option-green':
+                        color = colors["Green"]
+                    elif req_raw == 'option-red':
+                        color = colors["Red"]
+                    else:
+                        color = colors["Black"]
+
+                    #color = colors[getitem(args, 'color', 'Black')]
+                    #_from = int(getitem(args, '_from', 0))
+                    #to = int(getitem(args, 'to', 10))
+                    #x = list(range(_from, to + 1))
+
+                    _from = int(0)
+                    to = int(10)
+                    x = list(range(_from, to + 1))
+                except:
+                    color = 'Purple'
+                    _from = 0
+                    to = 10
+                    x = list(range(0, 10))
+
+                # Create a polynomial line graph with those arguments
+                fig = figure(title="Polynomial")
+                fig.line(x, [i ** 2 for i in x], color=color, line_width=2)
+
+                js_resources = INLINE.render_js()
+                css_resources = INLINE.render_css()
+
+                script, div = components(fig)
+                html = render_template(
+                    #'embed.html',
+                    'show_poly.html',
+                    plot_script=script,
+                    plot_div=div,
+                    js_resources=js_resources,
+                    css_resources=css_resources,
+                    color=color,
+                    _from=_from,
+                    to=to
+                )
+                return encode_utf8(html)
+
+
+            except:
+                flash("Bad query on Bokeh - could not interpret.")
+                return redirect(request.url)
 
     return render_template("index.html")
 
